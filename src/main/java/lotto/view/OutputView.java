@@ -20,7 +20,8 @@ public class OutputView {
     private static final String FOURTH_WINNING = "4개 일치 (50,000원)";
     private static final String FIFTH_WINNING = "3개 일치 (5,000원)";
     private static final String TOTAL_ROI = "총 수익률은 %.1f%%입니다.";
-
+    private static final String RANK_AND_COUNT = "%s - %d개%n";
+    private static final String LINE_BREAK = "\n";
     public static void printError(String message) {
         System.out.println(message);
     }
@@ -30,7 +31,7 @@ public class OutputView {
     }
 
     public static void showPurchaseAmountOutput(int amount) {
-        System.out.printf("\n" + SHOW_PURCHASE_AMOUNT + "\n", amount);
+        System.out.printf(LINE_BREAK + SHOW_PURCHASE_AMOUNT + LINE_BREAK, amount);
     }
 
     public static void printLotto(List<Lotto> lottos) {
@@ -45,14 +46,14 @@ public class OutputView {
     }
 
     public static void bonusNumberOutput() {
-        System.out.println("\n" + BONUS_NUMBER_INPUT_MESSAGE);
+        System.out.println(LINE_BREAK + BONUS_NUMBER_INPUT_MESSAGE);
     }
 
     public static void printWinningStatistics(LottoResult result) {
-        System.out.println(WIN_STATISTICS);
+        System.out.println(LINE_BREAK + WIN_STATISTICS);
         System.out.println(HYPHEN);
         for (Rank rank : Rank.printOrder()) {
-            System.out.printf("%s - %d개%n",
+            System.out.printf(RANK_AND_COUNT,
                     toMessage(rank),
                     result.getCounts().getOrDefault(rank, 0));
         }
