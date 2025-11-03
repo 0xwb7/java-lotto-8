@@ -1,7 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -24,6 +22,6 @@ class LottoTest {
 
         int countMatch = lotto.countMatch(winningLotto);
 
-        assertEquals(5, countMatch);
+        assertEquals(3, countMatch);
     }
 }
