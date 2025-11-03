@@ -20,6 +20,7 @@ public class LottoController {
     public void run() {
         OutputView.purchasePriceOutput();
         int amount = lottoService.purchaseAmount(purchasePriceRead());
+        OutputView.showPurchaseAmountOutput(amount);
 
         List<Lotto> lottos = lottoNumberGenerator.generateLottoNumber(amount);
         OutputView.printLotto(lottos);
