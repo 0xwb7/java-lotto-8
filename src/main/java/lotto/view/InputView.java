@@ -11,4 +11,8 @@ public class InputView {
     public static String winningNumberInput() {
         return Console.readLine();
     }
+
+    public static String bonusNumberInput() {
+        return Console.readLine();
+    }
 }

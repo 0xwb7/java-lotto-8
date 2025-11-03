@@ -24,6 +24,9 @@ public class LottoController {
 
         OutputView.winningNumberOutput();
         List<Integer> winningNumbers = winningNumberRead();
+
+        OutputView.bonusNumberOutput();
+        int bonus = bonusNumberRead(winningNumbers);
     }
 
     private int purchasePriceRead() {
@@ -45,6 +48,17 @@ public class LottoController {
                 Lotto.validate(winningNumbers);
                 LottoNumberParser.checkDuplicate(winningNumbers);
                 return winningNumbers;
+            } catch (LottoException e) {
+                OutputView.printError(e.getMessage());
+            }
+        }
+    }
+
+    private int bonusNumberRead(List<Integer> winningNumbers) {
+        while (true) {
+            try {
+                String input = InputView.bonusNumberInput();
+                return lottoService.validateBonusNumber(winningNumbers, input);
             } catch (LottoException e) {
                 OutputView.printError(e.getMessage());
             }

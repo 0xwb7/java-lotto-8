@@ -4,6 +4,8 @@ import lotto.exception.ErrorMessage;
 import lotto.exception.LottoException;
 import lotto.util.LottoNumberParser;
 
+import java.util.List;
+
 public class LottoService {
 
     private static final int PRICE = 1000;
@@ -26,5 +28,14 @@ public class LottoService {
 
     public int purchaseAmount(int purchasePrice) {
         return purchasePrice / PRICE;
+    }
+
+    public int validateBonusNumber(List<Integer> winningNumbers, String input) {
+        int bonus = LottoNumberParser.parseAndValidate(input);
+        if (winningNumbers.contains(bonus)) {
+            throw new LottoException(ErrorMessage.BONUS_NOT_ALLOWED_DUPLICATE);
+        }
+
+        return bonus;
     }
 }
