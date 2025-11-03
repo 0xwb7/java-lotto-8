@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.exception.LottoException;
 import lotto.service.LottoService;
 import lotto.util.LottoNumberGenerator;
+import lotto.util.LottoNumberParser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -20,6 +21,9 @@ public class LottoController {
 
         List<Lotto> lottos = lottoNumberGenerator.generateLottoNumber(amount);
         OutputView.printLotto(lottos);
+
+        OutputView.winningNumberOutput();
+        List<Integer> winningNumbers = winningNumberRead();
     }
 
     private int purchasePriceRead() {
@@ -27,6 +31,20 @@ public class LottoController {
             try {
                 String input = InputView.purchasePriceInput();
                 return lottoService.validatePurchasePriceInput(input);
+            } catch (LottoException e) {
+                OutputView.printError(e.getMessage());
+            }
+        }
+    }
+
+    private List<Integer> winningNumberRead() {
+        while (true) {
+            try {
+                String input = InputView.winningNumberInput();
+                List<Integer> winningNumbers = LottoNumberParser.parseWinningNumbers(input);
+                Lotto.validate(winningNumbers);
+                LottoNumberParser.checkDuplicate(winningNumbers);
+                return winningNumbers;
             } catch (LottoException e) {
                 OutputView.printError(e.getMessage());
             }

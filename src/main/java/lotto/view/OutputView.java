@@ -7,6 +7,7 @@ import java.util.List;
 public class OutputView {
 
     private static final String PURCHASE_PRICE_INPUT_MESSAGE = "구입금액을 입력해주세요.";
+    private static final String WINNING_NUMBER_INPUT_MESSAGE = "당첨 번호를 입력해주세요.";
 
     public static void printError(String message) {
         System.out.println(message);
@@ -21,5 +22,9 @@ public class OutputView {
             System.out.println(lotto.getNumbers());
         }
         System.out.println();
+    }
+
+    public static void winningNumberOutput() {
+        System.out.println(WINNING_NUMBER_INPUT_MESSAGE);
     }
 }

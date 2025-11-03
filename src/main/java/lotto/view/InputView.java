@@ -7,4 +7,8 @@ public class InputView {
     public static String purchasePriceInput() {
         return Console.readLine();
     }
+
+    public static String winningNumberInput() {
+        return Console.readLine();
+    }
 }
