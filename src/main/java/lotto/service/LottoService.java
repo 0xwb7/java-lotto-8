@@ -18,8 +18,9 @@ public class LottoService {
 
     public int validatePurchasePriceInput(String input) {
         try {
-            LottoNumberParser.checkNullInput(input);
-            int purchasePrice = Integer.parseInt(input);
+            String trimmed =  input.trim();
+            LottoNumberParser.checkNullInput(trimmed);
+            int purchasePrice = Integer.parseInt(trimmed);
             if (purchasePrice % PRICE != 0) {
                 throw new LottoException(ErrorMessage.WRONG_PURCHASE_INPUT);
             }
