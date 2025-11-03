@@ -18,18 +18,19 @@ public class LottoService {
 
     public int validatePurchasePriceInput(String input) {
         try {
-            String trimmed =  input.trim();
+            String trimmed = input.trim();
             LottoNumberParser.checkNullInput(trimmed);
             int purchasePrice = Integer.parseInt(trimmed);
-            if (purchasePrice % PRICE != 0) {
-                throw new LottoException(ErrorMessage.WRONG_PURCHASE_INPUT);
-            }
-            if (purchasePrice < PRICE) {
-                throw new LottoException(ErrorMessage.MINIMUM_PURCHASE_PRICE);
-            }
+            exceptionWrongPurchasePriceInput(purchasePrice);
             return purchasePrice;
         } catch (NumberFormatException e) {
             throw new LottoException(ErrorMessage.IS_NOT_NUMERIC);
+        }
+    }
+
+    private void exceptionWrongPurchasePriceInput(int purchasePrice) {
+        if (purchasePrice % PRICE != 0 || purchasePrice < PRICE) {
+            throw new LottoException(ErrorMessage.WRONG_PURCHASE_INPUT);
         }
     }
 

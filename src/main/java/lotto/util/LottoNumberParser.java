@@ -29,7 +29,6 @@ public class LottoNumberParser {
     }
 
     public static List<Integer> parseWinningNumbers(String input) {
-        checkNullInput(input);
         return Stream.of(input.split(SPLIT_DELIMITER))
                 .map(String::trim)
                 .map(LottoNumberParser::parseAndValidate)
@@ -39,12 +38,16 @@ public class LottoNumberParser {
     public static int parseAndValidate(String input) {
         checkNullInput(input);
         String trimmed = input.trim();
-        if (!trimmed.chars().allMatch(Character::isDigit)) {
-            throw new LottoException(ErrorMessage.IS_NOT_NUMERIC);
-        }
+        exceptionIsNotNumeric(trimmed);
         int number = Integer.parseInt(trimmed);
         validateNumberRange(number);
         return number;
+    }
+
+    private static void exceptionIsNotNumeric(String input) {
+        if (!input.chars().allMatch(Character::isDigit)) {
+            throw new LottoException(ErrorMessage.IS_NOT_NUMERIC);
+        }
     }
 
     public static void validateNumberRange(int number) {
